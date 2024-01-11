@@ -1,0 +1,12 @@
+@font-face {
+    font-family: bebasNeueRegular;
+    src: url('/assets/fonts/bebasNeue/bebasNeueRegular.ttf');
+}
+
+textarea {
+    resize: none;
+}
+
+h1.title {
+    font-family: bebasNeueRegular, sans-serif;
+}

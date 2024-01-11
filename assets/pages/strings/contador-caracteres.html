@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/assets/css/styles.css" rel="stylesheet" />
+    <title>Contador de Caracteres</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">From DEV to DEV</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Início</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Strings
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/assets/pages/strings/contador-caracteres.html">
+                                Contador de Caracteres
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Geradores
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Gerador de CPF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Validadores
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Validador de CPF</a></li>
+                    </ul>
+                </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Redes
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/assets/pages/redes/meu-ip.html">Qual é meu IP ?</a></li>
+                    </ul>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Sobre</a>
+                </li> -->
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <main class="p-5">
+        <h1 class="title text-center">Cntador de Caracteres</h1>
+
+        <form id="formCaracteres" class="row">
+            <div class="mb-3 col-md-12">
+                <label for="caracteres" class="form-label">Insire seu texto aqui</label>
+                <textarea id="caracteres" class="form-control" rows="15" cols="50" onkeyup="enableButton();"></textarea>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="result" class="form-label">Quantidade de caracteres</label>
+                <input id="result" type="text" class="form-control" value="0" readonly />
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="spaces" class="form-label">Quantidade de espaços em brancos</label>
+                <input id="spaces" type="text" class="form-control" value="0" readonly />
+            </div>
+            <div class="mb-3 col-md-12 d-flex justify-content-start">
+                <button id="btnCount" class="btn btn-success w-25" onclick="count(event);" disabled>Calcular</button>
+                <button id="btnClear" class="btn btn-danger w-25 mx-5" onclick="clear(event);" disabled>Limpar</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        function enableButton() {
+            let caracteres = document.getElementById('caracteres');
+            let btnCount = document.getElementById('btnCount');
+            let btnClear = document.getElementById('btnClear');
+
+            if (caracteres.value.length > 0) {
+                btnCount.disabled = false;
+                btnClear.disabled = false;
+            }
+            else {
+                btnCount.disabled = true;
+                btnClear.disabled = true;
+            }
+        }
+
+        async function count(e) {
+            e.preventDefault();
+
+            let caracteres = document.getElementById('caracteres');
+            let result = document.getElementById('result');
+            let spaces = document.getElementById('spaces');
+            let lines = document.getElementById('spaces');
+
+            result.value = caracteres.value.length;
+            spaces.value = await getSpaces(caracteres.value);
+            lines.value = await getLines(caracteres.value);
+        }
+
+        function clear(e) {
+            e.preventDefault();
+
+            let caracteres = document.getElementById('caracteres');
+            let result = document.getElementById('result');
+            let spaces = document.getElementById('spaces');
+
+            caracteres.value = "";
+            spaces.value = 0;
+            result.value = 0;
+        }
+
+        async function getSpaces(caracteres) {
+            let cont = 0;
+            for (let i = 0; i < caracteres.length; i++) {
+                if (caracteres[i] === " ")
+                    cont++;
+            }
+            return cont;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
